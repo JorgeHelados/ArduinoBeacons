@@ -16,15 +16,15 @@ class Publicador {
 private:
 
   uint8_t beaconUUID[16] = { 
-	'E', 'P', 'S', 'G', '-', 'G', 'T', 'I', 
-	'-', 'P', 'R', 'O', 'Y', '-', '3', 'A'
+	'S', 'O', 'Y', '-', 'U', 'N', '-', 'T', 
+	'E', 'C', 'L', 'A', 'D', 'O', '-', '-'
 	};
 
   // ............................................................
   // ............................................................
 public:
   EmisoraBLE laEmisora {
-	"GTI-3A", //  nombre emisora
+	"soy un teclado", //  nombre emisora
 	  0x004c, // fabricanteID (Apple)
 	  4 // txPower
 	  };
