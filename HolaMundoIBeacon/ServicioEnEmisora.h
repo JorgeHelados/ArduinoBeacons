@@ -1,5 +1,4 @@
 // -*- mode: c++ -*-
-
 // ----------------------------------------------------------
 // Jordi Bataller i Mascarell
 // 2019-07-17
@@ -45,7 +44,6 @@ uint8_t * stringAUint8AlReves( const char * pString, uint8_t * pUint, int tamMax
 class ServicioEnEmisora {
 
 public:
-
 
   // --------------------------------------------------------
   // --------------------------------------------------------
@@ -105,7 +103,6 @@ public:
   // N -> asignarPropiedades()
   // ----------------------------------------------------------
 	void asignarPropiedades ( uint8_t props ) {
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( " laCaracteristica.setProperties( props ); ");
 	  (*this).laCaracteristica.setProperties( props );
 	} // ()
 
@@ -117,7 +114,6 @@ public:
   // Permiso, Permiso -> asignarPermisos()
   // ----------------------------------------------------------
 	void asignarPermisos( SecureMode_t  permisoRead, SecureMode_t  permisoWrite ) {
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( "laCaracteristica.setPermission( permisoRead, permisoWrite ); " );
 	  (*this).laCaracteristica.setPermission( permisoRead, permisoWrite );
 	} // ()
 
@@ -128,9 +124,6 @@ public:
   // N -> asignarTamanyoDatos()
   // ----------------------------------------------------------
 	void asignarTamanyoDatos( uint8_t tam ) {
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.print( " (*this).laCaracteristica.setFixedLen( tam = " );
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( tam );
-	  // (*this).laCaracteristica.setFixedLen( tam );
 	  (*this).laCaracteristica.setMaxLen( tam );
 	} // ()
 
@@ -149,28 +142,12 @@ public:
 	  asignarPermisos( permisoRead, permisoWrite );
 	  asignarTamanyoDatos( tam );
 	} // ()
-												 
 
 	// .........................................................
 	// .........................................................
 
-  // ----------------------------------------------------------
-  // Char -> asignarTamanyoDatos()
-  // ----------------------------------------------------------
-	void asignarTamanyoDatos( uint8_t tam ) {
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.print( " (*this).laCaracteristica.setFixedLen( tam = " );
-	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( tam );
-	  // (*this).laCaracteristica.setFixedLen( tam );
-	  (*this).laCaracteristica.setMaxLen( tam );
-	} // ()
 	uint16_t escribirDatos( const char * str ) {
-	  // Serial.print( " return (*this).laCaracteristica.write( str  = " );
-	  // Serial.println( str );
-
 	  uint16_t r = (*this).laCaracteristica.write( str );
-
-	  // Serial.print( ">>>Escritos " ); Serial.print( r ); Serial.println( " bytes con write() " );
-
 	  return r;
 	} // ()
 
@@ -181,9 +158,7 @@ public:
   // Char -> notificarDatos() -> uint16_t
   // ----------------------------------------------------------
 	uint16_t notificarDatos( const char * str ) {
-	  
 	  uint16_t r = laCaracteristica.notify( &str[0] );
-
 	  return r;
 	} //  ()
 
@@ -196,7 +171,6 @@ public:
   void instalarCallbackCaracteristicaEscrita(CallbackCaracteristicaEscrita cb) {
       (*this).laCaracteristica.setWriteCallback(cb);
   } // ()
-
 
 	// .........................................................
 	// .........................................................
@@ -276,9 +250,6 @@ public:
   // activarServicio()
   // ----------------------------------------------------------
   void activarServicio( ) {
-	// entiendo que al llegar aquí ya ha sido configurado
-	// todo: características y servicio
-
 	err_t error = (*this).elServicio.begin();
 	Serial.print( " (*this).elServicio.begin(); error = " );
 	Serial.println( error );
@@ -292,7 +263,6 @@ public:
   // .........................................................
   // .........................................................
   operator BLEService&() {
-	// "conversión de tipo": si pongo esta clase en un sitio donde necesitan un BLEService
 	return elServicio;
   } // ()
 	
