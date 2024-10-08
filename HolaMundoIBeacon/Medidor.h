@@ -41,7 +41,8 @@ public:
   // medirCO2() -> N
   //---------------------------------------------------------
   int medirCO2() {
-      float Vgas = analogRead(pinVgas) * (3.3 / 1023.0); // Convertir la lectura a voltaje (0-3.3V)
+    /* Descomentar esto si el sensor pilla datos */
+    /*float Vgas = analogRead(pinVgas) * (3.3 / 1023.0); // Convertir la lectura a voltaje (0-3.3V)
     float Vref = analogRead(pinVref) * (3.3 / 1023.0); // Convertir la lectura a voltaje (0-3.3V)
     
     // Calcular la concentración de gas en ppm
@@ -52,10 +53,10 @@ public:
     } else if (gasConcentration < 0) {
         int valorNeg = (gasConcentration * (-1)) * 10;
         return valorNeg;
-    }
+    }*/
 
     // Valor de retorno predeterminado en caso de que no entre en ninguna condición
-    return 0;
+    return 1122;
 	  //return 235;
   } // ()
 
