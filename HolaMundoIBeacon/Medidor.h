@@ -37,6 +37,9 @@ public:
   const float Vgas0 = 1.65;  // Valor de Vgas en aire limpio (medido previamente)
   const float M = 0.1;       // Factor de calibración del sensor (ppm/V), ajusta este valor según tu sensor
 
+  //---------------------------------------------------------
+  // medirCO2() -> N
+  //---------------------------------------------------------
   int medirCO2() {
       float Vgas = analogRead(pinVgas) * (3.3 / 1023.0); // Convertir la lectura a voltaje (0-3.3V)
     float Vref = analogRead(pinVref) * (3.3 / 1023.0); // Convertir la lectura a voltaje (0-3.3V)
@@ -57,6 +60,7 @@ public:
   } // ()
 
   // .....................................................
+  // medirTemperatura() -> N ?
   // .....................................................
   int medirTemperatura() {
 	return -12; // qué frío !

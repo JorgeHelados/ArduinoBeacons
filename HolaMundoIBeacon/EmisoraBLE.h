@@ -69,9 +69,10 @@ public:
 	instalarCallbackConexionTerminada( cbct );
   } // ()
   */
-	
-  // .........................................................
-  // .........................................................
+
+  // ----------------------------------------------------------
+  // encenderEmisora()
+  // ----------------------------------------------------------
   void encenderEmisora() {
 	// Serial.println ( "Bluefruit.begin() " );
 	 Bluefruit.begin(); 
@@ -80,8 +81,9 @@ public:
 	 (*this).detenerAnuncio();
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // CallbackConexinEstablecida, CallbackConexionTerminada -> encenderEmisora()
+  // ----------------------------------------------------------
   void encenderEmisora( CallbackConexionEstablecida cbce,
 						CallbackConexionTerminada cbct ) {
 
@@ -92,8 +94,9 @@ public:
 
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // detenerAnuncio()
+  // ----------------------------------------------------------
   void detenerAnuncio() {
 
 	if ( (*this).estaAnunciando() ) {
@@ -103,15 +106,16 @@ public:
 
   }  // ()
   
-  // .........................................................
-  // estaAnunciando() -> Boleano
-  // .........................................................
+  // ----------------------------------------------------------
+  // estaAnunciando() -> T/F
+  // ----------------------------------------------------------
   bool estaAnunciando() {
 	return Bluefruit.Advertising.isRunning();
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // N, N, N, N -> emitirAnuncioIBeacon()
+  // ----------------------------------------------------------
   void emitirAnuncioIBeacon( uint8_t * beaconUUID, int16_t major, int16_t minor, uint8_t rssi ) {
 
 	//
@@ -200,6 +204,10 @@ public:
 
 	const uint8_t tamanyoCarga = strlen( carga );
   */
+
+  // ----------------------------------------------------------
+  // Char, N -> EmitirAnuncioIBeaconLibre()
+  // ----------------------------------------------------------
   void emitirAnuncioIBeaconLibre( const char * carga, const uint8_t tamanyoCarga ) {
 
 	(*this).detenerAnuncio(); 
@@ -260,8 +268,9 @@ public:
 	Globales::elPuerto.escribir( "emitiriBeacon libre  Bluefruit.Advertising.start( 0 );  \n");
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // ServicioEnEmisora -> anyadirServicio() -> T/F
+  // ----------------------------------------------------------
   bool anyadirServicio( ServicioEnEmisora & servicio ) {
 
 	Globales::elPuerto.escribir( " Bluefruit.Advertising.addService( servicio ); \n");
@@ -279,13 +288,16 @@ public:
   } // ()
 
   
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // ServicioEnEmisora ->anyadirServicioConSusCaracteristicas() -> T/F
+  // ----------------------------------------------------------
   bool anyadirServicioConSusCaracteristicas( ServicioEnEmisora & servicio ) { 
 	return (*this).anyadirServicio( servicio );
   } // 
 
-  // .........................................................
+  // ----------------------------------------------------------
+  // ServicioEnEmisora, ServicioEnEmisora::Caracteristica, T ->anyadirServicioConSusCaracteristicas() -> T/F
+  // ----------------------------------------------------------
   template <typename ... T>
   bool anyadirServicioConSusCaracteristicas( ServicioEnEmisora & servicio,
 											 ServicioEnEmisora::Caracteristica & caracteristica,
@@ -297,7 +309,9 @@ public:
 	
   } // ()
 
-  // .........................................................
+  // ----------------------------------------------------------
+  // ServicioEnEmisora, T ->anyadirServicioConSusCaracteristicasYActivar() -> T/F
+  // ----------------------------------------------------------
   template <typename ... T>
   bool anyadirServicioConSusCaracteristicasYActivar( ServicioEnEmisora & servicio,
 													 // ServicioEnEmisora::Caracteristica & caracteristica,
@@ -311,14 +325,16 @@ public:
 	
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // CallbackConexionEstablecida -> instalarCallbackConexionEstablecida()
+  // ----------------------------------------------------------
   void instalarCallbackConexionEstablecida( CallbackConexionEstablecida cb ) {
 	Bluefruit.Periph.setConnectCallback( cb );
   } // ()
 
-  // .........................................................
-  // .........................................................
+  // ----------------------------------------------------------
+  // CallbackConexionTerminada -> instalarCallbackConexionTerminada()
+  // ----------------------------------------------------------
   void instalarCallbackConexionTerminada( CallbackConexionTerminada cb ) {
 	Bluefruit.Periph.setDisconnectCallback( cb );
   } // ()

@@ -100,6 +100,10 @@ public:
 	// .........................................................
 	// CHR_PROPS_WRITE , CHR_PROPS_READ ,  CHR_PROPS_NOTIFY 
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // N -> asignarPropiedades()
+  // ----------------------------------------------------------
 	void asignarPropiedades ( uint8_t props ) {
 	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( " laCaracteristica.setProperties( props ); ");
 	  (*this).laCaracteristica.setProperties( props );
@@ -108,6 +112,10 @@ public:
 	// .........................................................
 	// SecureMode_t::SEC_MODE_OPEN  , SecureMode_t::SEC_MODE_NO_ACCESS
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // Permiso, Permiso -> asignarPermisos()
+  // ----------------------------------------------------------
 	void asignarPermisos( SecureMode_t  permisoRead, SecureMode_t  permisoWrite ) {
 	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( "laCaracteristica.setPermission( permisoRead, permisoWrite ); " );
 	  (*this).laCaracteristica.setPermission( permisoRead, permisoWrite );
@@ -115,6 +123,10 @@ public:
 
 	// .........................................................
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // N -> asignarTamanyoDatos()
+  // ----------------------------------------------------------
 	void asignarTamanyoDatos( uint8_t tam ) {
 	  // no puedo escribir AUN si el constructor llama a esto: Serial.print( " (*this).laCaracteristica.setFixedLen( tam = " );
 	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( tam );
@@ -125,6 +137,10 @@ public:
   public:
 	// .........................................................
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // N, Permiso, Permiso, N -> asignarPropiedadesPermisosYTamanyoDatos()
+  // ----------------------------------------------------------
 	void asignarPropiedadesPermisosYTamanyoDatos( uint8_t props,
 												 SecureMode_t  permisoRead,
 												 SecureMode_t  permisoWrite, 
@@ -137,6 +153,16 @@ public:
 
 	// .........................................................
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // Char -> asignarTamanyoDatos()
+  // ----------------------------------------------------------
+	void asignarTamanyoDatos( uint8_t tam ) {
+	  // no puedo escribir AUN si el constructor llama a esto: Serial.print( " (*this).laCaracteristica.setFixedLen( tam = " );
+	  // no puedo escribir AUN si el constructor llama a esto: Serial.println( tam );
+	  // (*this).laCaracteristica.setFixedLen( tam );
+	  (*this).laCaracteristica.setMaxLen( tam );
+	} // ()
 	uint16_t escribirDatos( const char * str ) {
 	  // Serial.print( " return (*this).laCaracteristica.write( str  = " );
 	  // Serial.println( str );
@@ -150,6 +176,10 @@ public:
 
 	// .........................................................
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // Char -> notificarDatos() -> uint16_t
+  // ----------------------------------------------------------
 	uint16_t notificarDatos( const char * str ) {
 	  
 	  uint16_t r = laCaracteristica.notify( &str[0] );
@@ -159,12 +189,21 @@ public:
 
 	// .........................................................
 	// .........................................................
-	void instalarCallbackCaracteristicaEscrita( CallbackCaracteristicaEscrita cb ) {
-	  (*this).laCaracteristica.setWriteCallback( cb );
-	} // ()
+
+  // ----------------------------------------------------------
+  // CallbackCaracteristicaEscrita -> instalarCallbackCaracteristicaEscrita()
+  // ----------------------------------------------------------
+  void instalarCallbackCaracteristicaEscrita(CallbackCaracteristicaEscrita cb) {
+      (*this).laCaracteristica.setWriteCallback(cb);
+  } // ()
+
 
 	// .........................................................
 	// .........................................................
+
+  // ----------------------------------------------------------
+  // activar()
+  // ----------------------------------------------------------
 	void activar() {
 	  err_t error = (*this).laCaracteristica.begin();
 	  Globales::elPuerto.escribir(  " (*this).laCaracteristica.begin(); error = " );
@@ -208,6 +247,10 @@ public:
   
   // .........................................................
   // .........................................................
+
+  // ----------------------------------------------------------
+  // escribeUUID()
+  // ----------------------------------------------------------
   void escribeUUID() {
 	Serial.println ( "**********" );
 	for (int i=0; i<= 15; i++) {
@@ -218,12 +261,20 @@ public:
 
   // .........................................................
   // .........................................................
+
+  // ----------------------------------------------------------
+  // Caracteristica -> anyadirCaracteristica()
+  // ----------------------------------------------------------
   void anyadirCaracteristica( Caracteristica & car ) {
 	(*this).lasCaracteristicas.push_back( & car );
   } // ()
 
   // .........................................................
   // .........................................................
+
+  // ----------------------------------------------------------
+  // activarServicio()
+  // ----------------------------------------------------------
   void activarServicio( ) {
 	// entiendo que al llegar aquí ya ha sido configurado
 	// todo: características y servicio

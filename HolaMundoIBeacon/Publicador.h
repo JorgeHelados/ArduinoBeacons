@@ -51,12 +51,14 @@ public:
   } // ()
 
   // ............................................................
+  // encenderEmisora()
   // ............................................................
   void encenderEmisora() {
 	(*this).laEmisora.encenderEmisora();
   } // ()
 
   // ............................................................
+  // N, N, N -> PublicarCO2()
   // ............................................................
   void publicarCO2( int16_t valorCO2, uint8_t contador,
 					long tiempoEspera ) {
@@ -93,6 +95,7 @@ public:
   } // ()
 
   // ............................................................
+  // N, N, N -> publicarTemperatura()
   // ............................................................
   void publicarTemperatura( int16_t valorTemperatura,
 							uint8_t contador, long tiempoEspera ) {
