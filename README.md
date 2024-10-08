@@ -56,6 +56,3 @@ El proyecto está dividido en varias clases que manejan diferentes aspectos del 
 4. Carga el código en la placa Arduino.
 5. Utiliza una aplicación compatible con BLE para monitorizar los datos transmitidos.
 
-## Contribuciones
-
-Las contribuciones son bienvenidas. Siéntete libre de abrir un issue o un pull request para sugerir mejoras o nuevas características.
